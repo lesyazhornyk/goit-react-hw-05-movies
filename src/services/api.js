@@ -12,6 +12,16 @@ export const fetchTradingToday = async () => {
   return response.data.results;
 };
 
+export const searchMovies = async query => {
+  const params = new URLSearchParams({
+    api_key: API_KEY,
+    query,
+  });
+
+  const response = await axios.get(`${BASE_URL}search/movie?${params}`);
+  return response.data.results;
+};
+
 export const fetchMovieById = async movieId => {
   const params = new URLSearchParams({
     api_key: API_KEY,
@@ -48,6 +58,7 @@ const api = {
   fetchReviewsByMovieId,
   fetchTradingToday,
   fetchMovieById,
+  searchMovies,
 };
 
 export default api;

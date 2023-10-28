@@ -1,6 +1,8 @@
+import Cast from 'components/Cast/Cast';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
 import MovieAdditionalInformation from 'components/MovieAdditionalInformation/MovieAdditionalInformation';
 import MovieContent from 'components/MovieContent/MovieContent';
+import Reviews from 'components/Reviews/Reviews';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieById } from 'services/api';
@@ -10,6 +12,7 @@ export default function MovieDetailsPage({ cast, reviews }) {
   const [movieDetails, setMovieDetails] = useState();
 
   useEffect(() => {
+    if (!movieId) return;
     async function getMovieDetails() {
       try {
         const movie = await fetchMovieById(movieId);
@@ -28,8 +31,8 @@ export default function MovieDetailsPage({ cast, reviews }) {
           <hr />
           <MovieAdditionalInformation />
           <hr />
-          {cast && <div>Cast Component</div>}
-          {reviews && <div>Reviews Component</div>}
+          {cast && <Cast />}
+          {reviews && <Reviews />}
         </>
       )}
     </div>
