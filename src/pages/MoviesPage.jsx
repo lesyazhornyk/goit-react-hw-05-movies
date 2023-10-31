@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import styles from './Searchbar.module.css';
 import { Formik, Form, Field } from 'formik';
 import { useEffect, useState } from 'react';
@@ -7,6 +7,8 @@ import Loader from 'components/Loader/Loader';
 
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const location = useLocation();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -69,7 +71,7 @@ const MoviesPage = () => {
             <li key={movie.id}>
               <Link
                 to={`/movies/${movie.id}`}
-                state={{ from: `/movies?query=${query}` }}
+                state={{ from: location }}
               >
                 {movie.title}
               </Link>
